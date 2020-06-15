@@ -17,22 +17,7 @@ class CoffeeMachine {
     enum class RECIPE(val type: String, val water: Int, val milk: Int, val beans: Int, val cups: Int, val money: Int) {
         ESPRESSO("espresso", 250, 0, 16, 1, -4),
         LATTE("latte", 350, 75, 20, 1, -7),
-        CAPPUCCINO("cappuccino", 200, 100, 12, 1, -6),
-        NULL("null", 0, 0, 0, 0, 0);
-
-        companion object {
-            fun findByName(recipe: RECIPE): RECIPE {
-                for (enum in values()) {
-                    if (recipe.name == enum.name) return enum
-                }
-                return NULL
-            }
-        }
-
-        fun getIngredients(): Array<Int> {
-            return arrayOf(water, milk, beans, cups, money)
-        }
-
+        CAPPUCCINO("cappuccino", 200, 100, 12, 1, -6);
     }
     internal class Inventory {
         private var water: Int = 400
@@ -62,13 +47,6 @@ class CoffeeMachine {
                 this.cups -  recipe.cups  < 0 -> missing = "cups"
             }
             return missing
-        }
-
-        private fun fill(water: Int, milk: Int, beans: Int, cups: Int) {
-            this.water += water
-            this.milk += milk
-            this.beans += beans
-            this.cups += cups
         }
 
         fun takeMoney(): Int {
@@ -178,7 +156,7 @@ class CoffeeMachine {
 
 fun main() {
     val scanner = Scanner(System.`in`)
-    val coffeeMachine: CoffeeMachine = CoffeeMachine()
+    val coffeeMachine = CoffeeMachine()
 
     while (scanner.hasNext()) {
         coffeeMachine.run(scanner.next())
